@@ -46,7 +46,7 @@ class ResourceDetailDTO(BaseModel):
     access_source:str
     permissions:Set[str]
 
-class UserDashboardViewDTO(BaseModel):
+class UsersResourcesDTO(BaseModel):
     model_config = ConfigDict(str_strip_whitespace=True)
     user_id: str
     groups: List[GroupDetailDTO]
