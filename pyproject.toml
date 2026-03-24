@@ -1,7 +1,7 @@
 [project]
 name = "commonx"
 version = "0.0.1a0"
-description = ""
+description = "This contains common code for all the projects in the jub organization."
 authors = [
     {name = "Ignacio Castillo",email = "ignacio.bcastillo@gmail.com"}
 ]
