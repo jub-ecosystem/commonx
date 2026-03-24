@@ -12,9 +12,6 @@ class LicenseAssignedModel(TimestampMixin):
     license: str
     scope: str 
     expires_at:str
-
-
-
 class User(TimestampMixin):
 
     model_config = ConfigDict(str_strip_whitespace=True)
