@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: ["*"]
     paths:
-      - "mictlanx/**"
+      - "commonx/**"
       - "tests/**"
       - "pyproject.toml"
   
@@ -15,10 +15,10 @@ jobs:
   build:  
     runs-on: ubuntu-latest  
     env:
-      MICTLANX_LOG_PATH: ${{ github.workspace }}/mictlanx/client
+      COMMONX_LOG_PATH: ${{ github.workspace }}/commonx/client
     strategy:  
       matrix:  
-        python-version: ["3.9"]  
+        python-version: ["3.10"]  
     steps:  
       - uses: actions/checkout@v3  
       - name: Set up Python ${{ matrix.python-version }}  
@@ -31,10 +31,7 @@ jobs:
           echo "$HOME/.local/bin" >> $GITHUB_PATH  # Ensure poetry is on PATH
       - name: Prepare log folder
         run: |
-          mkdir -p "${MICTLANX_LOG_PATH}"
-      - name: Start MictlanX Service
-        run: |
-          chmod +x deploy_router.sh && ./deploy_router.sh
+          mkdir -p "${COMMONX_LOG_PATH}"
       - name: Configure Poetry
         run: |
           poetry config virtualenvs.create true
@@ -54,7 +51,7 @@ jobs:
         run: |  
           poetry run coverage run -m pytest  -v -s  
         env:
-          LOG_PATH: log  
+          LOG_PATH: ${{ env.COMMONX_LOG_PATH }}
       - name: Generate Coverage Report  
         run: |  
           poetry run coverage report -m
