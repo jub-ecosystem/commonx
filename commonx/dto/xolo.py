@@ -1,5 +1,5 @@
 from typing import Dict,Set,Optional,List,Generic,TypeVar
-from pydantic import BaseModel,ConfigDict
+from pydantic import BaseModel,ConfigDict,EmailStr
 T = TypeVar("T")
 
 class AuthAttemptDTO(BaseModel):
@@ -52,6 +52,7 @@ class UsersResourcesDTO(BaseModel):
     groups: List[GroupDetailDTO]
     owned_resources: PaginatedResponseDTO[ResourceDetailDTO] # Updated type
     shared_resources: PaginatedResponseDTO[ResourceDetailDTO] # Updated type
+UserDashboardViewDTO = UsersResourcesDTO
 
 class AddOrDeleteMembersToGroupDTO(BaseModel):
     model_config = ConfigDict(str_strip_whitespace=True)
@@ -94,12 +95,11 @@ class SignUpDTO(BaseModel):
     username:str
     first_name:str
     last_name:str
-    email:str
+    email:EmailStr
     password:str
     profile_photo:str=""
     scope: str
     expiration: Optional[str] = "1h"
-
 class DeleteLicenseDTO(BaseModel):
     model_config = ConfigDict(str_strip_whitespace=True)
     username:str
@@ -178,7 +178,7 @@ class AuthenticatedDTO(BaseModel):
     username:str
     first_name:str
     last_name:str
-    email:str
+    email:EmailStr
     profile_photo:str
     access_token:str
     metadata:Dict[str,str]
@@ -191,7 +191,7 @@ class UserDTO(BaseModel):
     username:str
     first_name:str
     last_name:str
-    email:str
+    email:EmailStr
     profile_photo:str
     disabled:Optional[bool]=False
 
