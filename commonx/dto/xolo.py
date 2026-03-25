@@ -98,7 +98,7 @@ class SignUpDTO(BaseModel):
     password:str
     profile_photo:str=""
     scope: str
-    expiration: str
+    expiration: Optional[str] = "1h"
 
 class DeleteLicenseDTO(BaseModel):
     model_config = ConfigDict(str_strip_whitespace=True)
