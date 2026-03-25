@@ -89,6 +89,17 @@ class CreateUserDTO(BaseModel):
     password:str
     profile_photo:str=""
 
+class SignUpDTO(BaseModel):
+    model_config = ConfigDict(str_strip_whitespace=True)
+    username:str
+    first_name:str
+    last_name:str
+    email:str
+    password:str
+    profile_photo:str=""
+    scope: str
+    expiration: str
+
 class DeleteLicenseDTO(BaseModel):
     model_config = ConfigDict(str_strip_whitespace=True)
     username:str
