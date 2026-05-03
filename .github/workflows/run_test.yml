@@ -10,6 +10,10 @@ on:
       - "tests/**"
       - "pyproject.toml"
   
+permissions:
+  contents: read
+  id-token: write
+
   
 jobs:  
   build:  
@@ -56,3 +60,12 @@ jobs:
       - name: Generate Coverage Report  
         run: |  
           poetry run coverage report -m
+      - name: Generate Coverage XML
+        run: |
+          poetry run coverage xml
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          files: ./coverage.xml
+          fail_ci_if_error: true
+          use_oidc: true

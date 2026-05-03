@@ -1,8 +1,17 @@
 from abc import ABC,abstractmethod
 from typing import Optional,Dict,Any
 from option import Err
-from fastapi import HTTPException
 from pydantic import BaseModel
+
+try:
+    from fastapi import HTTPException
+except ModuleNotFoundError:
+    class HTTPException(Exception):
+        def __init__(self, status_code: int, detail: Any = None, headers: Optional[Dict[str,Any]] = None):
+            super().__init__(detail)
+            self.status_code = status_code
+            self.detail = detail
+            self.headers = headers
 
 
 ERROR_CODES = {
